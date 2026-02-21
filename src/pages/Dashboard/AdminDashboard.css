@@ -1,0 +1,499 @@
+/* src/pages/Dashboard/AdminDashboard.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.admin-main-content {
+  margin-left: 260px;
+  flex: 1;
+  padding: 32px 40px;
+  width: calc(100% - 260px);
+}
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.admin-page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.admin-page-header p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.admin-badge {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.shield-icon {
+  font-size: 32px;
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.admin-stats-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.green-bg {
+  background: #dcfce7;
+}
+
+.blue-bg {
+  background: #dbeafe;
+}
+
+.red-bg {
+  background: #fee2e2;
+}
+
+.yellow-bg {
+  background: #fef3c7;
+}
+
+.recharge-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.recharge-btn:hover {
+  background: #2563eb;
+}
+
+.stat-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-trend {
+  font-size: 13px;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.stat-trend.positive::before {
+  content: "↑ ";
+}
+
+.violations-fine {
+  font-size: 13px;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.stat-note {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ============================================
+   CONTENT SECTION
+   ============================================ */
+.admin-content-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+/* ============================================
+   TRIPS LIST
+   ============================================ */
+.admin-trips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-trip-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.admin-trip-item:hover {
+  background: #f3f4f6;
+}
+
+.trip-icon {
+  width: 48px;
+  height: 48px;
+  background: #dbeafe;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.trip-details {
+  flex: 1;
+}
+
+.trip-details h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.trip-details p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.trip-fare {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-right: 16px;
+}
+
+.trip-status {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.trip-status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.trip-status.violation {
+  background: #fef3c7;
+  color: #854d0e;
+}
+
+/* ============================================
+   ALERTS LIST
+   ============================================ */
+.admin-alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-alert-item {
+  padding: 16px;
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+}
+
+.alert-error {
+  background: #fef2f2;
+  border-left: 3px solid #ef4444;
+}
+
+.alert-warning {
+  background: #fefce8;
+  border-left: 3px solid #eab308;
+}
+
+.alert-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.alert-content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.alert-content p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.alert-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.view-all-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-all-btn:hover {
+  background: #f9fafb;
+  border-color: #3b82f6;
+}
+
+/* ============================================
+   CHARTS SECTION
+   ============================================ */
+.charts-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.chart-card {
+  min-height: 400px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.chart-menu-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.chart-menu-btn:hover {
+  color: #6b7280;
+}
+
+/* ============================================
+   REVENUE CHART
+   ============================================ */
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.revenue-chart {
+  width: 100%;
+  height: 250px;
+}
+
+.chart-labels {
+  display: flex;
+  justify-content: space-around;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+/* ============================================
+   DONUT CHART
+   ============================================ */
+.donut-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 20px 0;
+}
+
+.donut-chart {
+  width: 200px;
+  height: 200px;
+}
+
+.donut-legend {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.legend-dot.red {
+  background: #ef4444;
+}
+
+.legend-dot.orange {
+  background: #f59e0b;
+}
+
+.legend-dot.yellow {
+  background: #f97316;
+}
+
+.legend-label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.legend-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+  .admin-stats-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-content-section,
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .admin-main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .admin-stats-section {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-page-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .admin-badge {
+    width: 50px;
+    height: 50px;
+  }
+
+  .shield-icon {
+    font-size: 24px;
+  }
+}
