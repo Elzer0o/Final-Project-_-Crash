@@ -2,17 +2,21 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../../APi/axiosConfig"; 
+import { ENDPOINTS } from "../../APi/endpoints"; 
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("user"); // 'user' or 'admin'
+  const [activeTab, setActiveTab] = useState("user");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     rememberMe: false,
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(""); 
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -22,147 +26,135 @@ function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(""); 
 
-    if (activeTab === "user") {
-      console.log("User Login:", formData);
-      // Redirect to User Dashboard
-      navigate("/dashboard");
-    } else {
-      console.log("Admin Login:", formData);
-      // Redirect to Admin Dashboard
-      navigate("/admin/dashboard");
+    try {
+      const response = await API.post(ENDPOINTS.LOGIN, {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.access);
+        localStorage.setItem("userName", response.data.name);
+
+        if (activeTab === "user") {
+          navigate("/dashboard");
+        } else {
+          navigate("/admin/dashboard");
+        }
+      }
+    } catch (err) {
+      const errorMsg = err.response?.data?.non_field_errors?.[0] || 
+                       err.response?.data?.detail || 
+                       "Invalid email or password.";
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-page">
-      {/* Background decoration */}
       <div className="login-bg-shapes">
         <div className="shape shape-1"></div>
         <div className="shape shape-2"></div>
         <div className="shape shape-3"></div>
       </div>
 
-      {/* Login Container */}
       <div className="login-container">
-        {/* Left Side - Branding */}
         <div className="login-branding">
           <div className="branding-content">
-            <div className="brand-logo">
-              <span className="logo-text">GatePass</span>
-            </div>
-
             <h1 className="branding-title">
-              Welcome Back to
-              <br />
-              GatePass
+              Your Journey <br /> Starts Here.
             </h1>
-
             <p className="branding-description">
-              Secure access to Egypt's automated vehicle gate payment system.
-              Login to manage your account and vehicle transactions.
+              Experience the next generation of transport management with our
+              secure, efficient, and smart platform.
             </p>
 
             <div className="branding-features">
               <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>Secure Authentication</span>
+                <span className="feature-icon">🛡️</span>
+                <span>Secure Payments & Wallets</span>
               </div>
               <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>Bank-Level Encryption</span>
-              </div>
-              <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>24/7 Support</span>
+                <span className="feature-icon">⚡</span>
+                <span>Real-time Trip Tracking</span>
               </div>
             </div>
-
-            <div className="branding-badge">
-              🇪🇬 Official Government Platform
-            </div>
+            <div className="branding-badge">Certified Smart System 2026</div>
           </div>
         </div>
 
-        {/* Right Side - Login Form */}
         <div className="login-form-section">
           <div className="form-wrapper">
-            {/* Tab Switcher */}
             <div className="login-tabs">
               <button
+                type="button"
                 className={`tab-button ${activeTab === "user" ? "active" : ""}`}
                 onClick={() => setActiveTab("user")}
               >
-                <span className="tab-icon">👤</span>
-                <span className="tab-label">User Login</span>
+                <span className="tab-label">User Account</span>
               </button>
               <button
-                className={`tab-button ${
-                  activeTab === "admin" ? "active" : ""
-                }`}
+                type="button"
+                className={`tab-button ${activeTab === "admin" ? "active" : ""}`}
                 onClick={() => setActiveTab("admin")}
               >
-                <span className="tab-icon">👨‍💼</span>
                 <span className="tab-label">Administrator</span>
               </button>
             </div>
 
-            {/* Form Header */}
             <div className="form-header">
               <h2 className="form-title">
-                {activeTab === "user" ? "User Sign In" : "Administrator Access"}
+                {activeTab === "user" ? "Welcome Back" : "Admin Portal"}
               </h2>
               <p className="form-subtitle">
-                {activeTab === "user"
-                  ? "Enter your credentials to access your dashboard"
-                  : "Authorized personnel only - secure admin access"}
+                Please enter your credentials to access your account.
               </p>
             </div>
 
-            {/* Login Form */}
+            {/* Error Message UI */}
+            {error && (
+              <div className="error-message-ui">
+                <span className="error-icon">⚠️</span>
+                {error}
+              </div>
+            )}
+
             <form className="login-form" onSubmit={handleSubmit}>
-              {/* Email/Username Field */}
               <div className="form-group">
-                <label className="form-label" htmlFor="email">
-                  {activeTab === "user" ? "Email Address" : "Admin Username"}
-                </label>
+                <label className="form-label">Email Address</label>
                 <div className="input-wrapper">
-                  <span className="input-icon">✉️</span>
                   <input
-                    type="text"
-                    id="email"
+                    type="email"
                     name="email"
                     className="form-input"
-                    placeholder={
-                      activeTab === "user"
-                        ? "Enter your email"
-                        : "Enter admin username"
-                    }
+                    placeholder="name@example.com"
+                    required
                     value={formData.email}
                     onChange={handleInputChange}
-                    required
+                    style={{ paddingLeft: '16px' }} // عشان شلنا الأيقونة فبنظبط الـ padding
                   />
                 </div>
               </div>
 
-              {/* Password Field */}
               <div className="form-group">
-                <label className="form-label" htmlFor="password">
-                  Password
-                </label>
+                <label className="form-label">Password</label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🔒</span>
                   <input
                     type={showPassword ? "text" : "password"}
-                    id="password"
                     name="password"
                     className="form-input"
-                    placeholder="Enter your password"
+                    placeholder="••••••••"
+                    required
                     value={formData.password}
                     onChange={handleInputChange}
-                    required
+                    style={{ paddingLeft: '16px' }}
                   />
                   <button
                     type="button"
@@ -174,7 +166,6 @@ function Login() {
                 </div>
               </div>
 
-              {/* Remember Me & Forgot Password */}
               <div className="form-options">
                 <label className="checkbox-label">
                   <input
@@ -185,74 +176,34 @@ function Login() {
                   />
                   <span className="checkbox-text">Remember me</span>
                 </label>
-                <a href="/forgot-password" className="forgot-link">
-                  Forgot Password?
+                
+                <a href="#" className="forgot-link" onClick={(e) => e.preventDefault()}>
+                  Forgot password?
                 </a>
               </div>
 
-              {/* Submit Button */}
-              <button type="submit" className="submit-button">
-                {activeTab === "user"
-                  ? "Sign In to Dashboard"
-                  : "Access Admin Panel"}
-                <span className="button-arrow">→</span>
+              <button type="submit" className="submit-button" disabled={loading}>
+                <span>{loading ? "Processing..." : (activeTab === "user" ? "Sign In" : "Admin Login")}</span>
+                {!loading && <span className="button-arrow">→</span>}
               </button>
 
-              {/* Divider */}
+              <div className="form-divider"><span>OR</span></div>
+
               {activeTab === "user" && (
-                <>
-                  <div className="form-divider">
-                    <span>OR</span>
-                  </div>
-
-                  {/* Sign Up Link */}
-                  <div className="signup-prompt">
-                    <p>
-                      Don't have an account?{" "}
-                      <a href="/signup" className="signup-link">
-                        Create Account
-                      </a>
-                    </p>
-                  </div>
-                </>
-              )}
-
-              {/* Admin Security Notice */}
-              {activeTab === "admin" && (
-                <div className="admin-notice">
-                  <span className="notice-icon">⚠️</span>
+                <div className="signup-prompt">
                   <p>
-                    This area is restricted to authorized administrators only.
-                    All access attempts are logged and monitored.
+                    Don't have an account?{" "}
+                    <a href="/signup" className="signup-link">Create Account</a>
                   </p>
                 </div>
               )}
             </form>
 
-            {/* Back to Home Link */}
             <div className="back-home">
               <button onClick={() => navigate("/")} className="home-link">
                 ← Back to Home
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Trust Badges Footer */}
-      <div className="login-footer">
-        <div className="footer-badges">
-          <div className="badge-item">
-            <span className="badge-icon">🔒</span>
-            <span>SSL Secured</span>
-          </div>
-          <div className="badge-item">
-            <span className="badge-icon">✓</span>
-            <span>Government Certified</span>
-          </div>
-          <div className="badge-item">
-            <span className="badge-icon">🛡️</span>
-            <span>Bank-Grade Security</span>
           </div>
         </div>
       </div>
