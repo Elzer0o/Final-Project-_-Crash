@@ -2,13 +2,13 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api', // العنوان اللي حددناه
+  baseURL: 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Interceptor عشان يضيف الـ Token تلقائياً في الطلبات الجاية
+// Interceptor Token
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -16,5 +16,6 @@ API.interceptors.request.use((config) => {
   }
   return config;
 });
+
 
 export default API;
