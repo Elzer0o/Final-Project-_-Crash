@@ -188,7 +188,25 @@ function Login() {
               </button>
 
               <div className="form-divider"><span>OR</span></div>
-
+              {/*div Mode TO skip Sign in */}
+              <div style={{ textAlign: 'center' }}>
+                <button
+                  type="button"
+                  onClick={() => navigate("/dashboard")}
+                  style={{
+                    marginTop: '10px',
+                    background: 'none',
+                    border: 'none',
+                    color: '#94a3b8',
+                    cursor: 'pointer',
+                    fontSize: '0.8rem',
+                    textDecoration: 'underline'
+                  }}
+                >
+                  (Dev Mode) Skip to Dashboard → 
+                </button>
+              </div>
+              
               {activeTab === "user" && (
                 <div className="signup-prompt">
                   <p>
