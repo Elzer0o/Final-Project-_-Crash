@@ -27,38 +27,50 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98); 
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
   z-index: 1000;
-  transition: all 0.3s ease;
+  height: 80px; 
+  display: flex;
+  align-items: center; 
 }
 
 .nav-container {
   max-width: 1400px;
+  width: 100%; 
   margin: 0 auto;
-  padding: 16px 40px;
+  padding: 0 40px; 
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: space-between;
 }
 
 .nav-logo {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items: center; 
+  gap: 12px;           
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;    
   color: #1e293b;
   cursor: pointer;
+  text-decoration: none;
 }
 
+.nav-logo-img {
+  width: 42px;         
+  height: 42px;
+  object-fit: contain; 
+  transition: transform 0.3s ease;
+}
 .logo-icon {
   font-size: 2rem;
 }
-
 .logo-text {
-  letter-spacing: -0.5px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;          
 }
 
 .nav-menu {
@@ -243,7 +255,7 @@
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: linear-gradient(135deg, #00bc16 0%, #00bc16 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -283,8 +295,8 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #1e3a8a;
+  background: linear-gradient(135deg, #00bc16 0%, #00bc16 100%);
+  color: #ffffff;
   box-shadow: 0 8px 24px rgba(251, 191, 36, 0.4);
 }
 
