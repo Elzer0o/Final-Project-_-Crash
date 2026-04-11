@@ -4,6 +4,7 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LayoutDashboard, Car, Wallet, User } from "lucide-react";
 import "./Sidebar.css";
+import mustLogo from "../assets/PicTures/Must_Without_BackGround.jpg";
 
 function Sidebar({ userData, role = "user" }) {
   const navigate = useNavigate();
@@ -79,15 +80,18 @@ function Sidebar({ userData, role = "user" }) {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-header">
-        <div className="sidebar-logo">
-          <div className="sidebar-logo-icon" />
-          <div>
-            <h3>AutoFare</h3>
-            <p>{role === "admin" ? "Admin Panel" : "Driver"}</p>
-          </div>
+    <div className="sidebar-header">
+      <div className="sidebar-logo">
+        <img 
+          src={mustLogo} 
+          alt="MUST Logo" 
+          className="sidebar-logo-img" 
+        />
+        <div className="sidebar-brand-text">
+          <h3>MUST-GATE</h3>
         </div>
       </div>
+    </div>
 
       <nav className="sidebar-menu">
         {menuItems.map((item) => {
